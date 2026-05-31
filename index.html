@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricketIQ AI | Multi-Agent Cricket Intelligence (Gemma 4 E4B)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="CricketIQ AI is a state-of-the-art multi-agent cricket intelligence dashboard powered by Gemma 4 E4B. Deconstruct matches with planner, analytics, and predictions.">
+    <meta name="keywords" content="cricket, ai, analytics, gemma, kohli, india vs pakistan, win probability, sports intelligence">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header / Navbar -->
+        <header class="app-header" id="header">
+            <div class="header-logo">
+                <span class="logo-icon">🏏</span>
+                <div class="logo-text">
+                    <h1>CricketIQ <span class="accent-text">AI</span></h1>
+                    <span class="logo-tagline">Gemma 4 E4B Multi-Agent Pipeline</span>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <div class="match-selector-wrapper">
+                    <label for="match-select">Active Match:</label>
+                    <select id="match-select" class="custom-select">
+                        <option value="t20wc_2022_ind_pak" selected>🇮🇳 IND vs PAK 🇵🇰 - T20 World Cup 2022</option>
+                        <option value="empty_match">Custom Query Mode (No Data Loaded)</option>
+                    </select>
+                </div>
+                
+                <div class="model-badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-label">Gemma 4 E4B Active</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout Grid -->
+        <main class="app-grid">
+            
+            <!-- Left Column: Intelligence Agent Hub & Chat Console -->
+            <section class="left-column flex-col" aria-label="Intelligence Hub">
+                
+                <!-- Agent Pipeline Flow Visualizer -->
+                <div class="card glass-card pipeline-visualizer-card">
+                    <div class="card-header">
+                        <h2><span class="card-header-dot"></span> Multi-Agent Pipeline Monitor</h2>
+                        <span class="pipeline-status" id="global-pipeline-status">Idle</span>
+                    </div>
+                    
+                    <div class="pipeline-steps">
+                        <!-- Step 1: Planner -->
+                        <div class="pipeline-step" id="step-planner" data-step="1">
+                            <div class="step-icon">📋</div>
+                            <div class="step-info">
+                                <div class="step-meta">
+                                    <h3>Planner Agent</h3>
+                                    <span class="step-status">Idle</span>
+                                </div>
+                                <p class="step-desc">Decomposes queries into logical execution task-lists.</p>
+                                <div class="step-telemetry" id="telemetry-planner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Data Retrieval -->
+                        <div class="pipeline-step" id="step-data" data-step="2">
+                            <div class="step-icon">📥</div>
+                            <div class="step-info">
+                                <div class="step-meta">
+                                    <h3>Data Retrieval Agent</h3>
+                                    <span class="step-status">Idle</span>
+                                </div>
+                                <p class="step-desc">Extracts, validates, and filters target JSON records.</p>
+                                <div class="step-telemetry" id="telemetry-data"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Analytics -->
+                        <div class="pipeline-step" id="step-analytics" data-step="3">
+                            <div class="step-icon">⚙️</div>
+                            <div class="step-info">
+                                <div class="step-meta">
+                                    <h3>Analytics Agent</h3>
+                                    <span class="step-status">Idle</span>
+                                </div>
+                                <p class="step-desc">Calculates win probabilities, phases, and matchups.</p>
+                                <div class="step-telemetry" id="telemetry-analytics"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Prediction -->
+                        <div class="pipeline-step" id="step-prediction" data-step="4">
+                            <div class="step-icon">🔮</div>
+                            <div class="step-info">
+                                <div class="step-meta">
+                                    <h3>Prediction Agent</h3>
+                                    <span class="step-status">Idle</span>
+                                </div>
+                                <p class="step-desc">Generates counterfactuals & next-match projections.</p>
+                                <div class="step-telemetry" id="telemetry-prediction"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Gemma Explanation -->
+                        <div class="pipeline-step" id="step-explanation" data-step="5">
+                            <div class="step-icon">🤖</div>
+                            <div class="step-info">
+                                <div class="step-meta">
+                                    <h3>Gemma Explanation Agent</h3>
+                                    <span class="step-status">Idle</span>
+                                </div>
+                                <p class="step-desc">Formulates elite, cricket-literate analyst breakdowns.</p>
+                                <div class="step-telemetry" id="telemetry-explanation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat & Response Console -->
+                <div class="card glass-card chat-card flex-grow flex-col">
+                    <div class="card-header">
+                        <h2><span class="card-header-dot blue"></span> CricketIQ AI Terminal</h2>
+                        <button id="clear-chat-btn" class="secondary-btn">Clear Logs</button>
+                    </div>
+                    
+                    <div class="chat-outputs" id="chat-outputs">
+                        <!-- Default greeting -->
+                        <div class="system-message">
+                            <p><strong>System Initialization:</strong> CricketIQ AI Engine online. Ready to analyze match: <strong>India vs Pakistan, Melbourne T20 2022</strong>.</p>
+                            <p class="suggestion-tip">Select a suggested query below or type your own to run the multi-agent pipeline.</p>
+                        </div>
+                    </div>
+
+                    <!-- Suggested Prompts Grid -->
+                    <div class="suggested-prompts">
+                        <button class="prompt-btn" data-query="Why did Pakistan lose?">Why did Pakistan lose?</button>
+                        <button class="prompt-btn" data-query="Why did Babar Azam underperform?">Babar Azam Match Analysis</button>
+                        <button class="prompt-btn" data-query="What if Virat Kohli got out in the 19th over?">What if Kohli got out in over 19?</button>
+                        <button class="prompt-btn" data-query="Explain Haris Rauf's matchup against Kohli.">Kohli vs Rauf Matchup</button>
+                    </div>
+
+                    <!-- Input Area -->
+                    <form class="chat-input-area" id="chat-form">
+                        <input type="text" id="user-input" placeholder="Ask about wickets, partnerships, win probabilities, turning points..." required autocomplete="off">
+                        <button type="submit" id="send-btn" class="primary-btn">
+                            <span>Analyze</span>
+                            <span class="btn-spinner" id="btn-spinner"></span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Right Column: Interactive Dashboard & Visualizations -->
+            <section class="right-column flex-col" aria-label="Match Intelligence Center">
+                
+                <!-- Win Probability & Momentum Charts -->
+                <div class="card glass-card chart-card-wrapper">
+                    <div class="card-header flex-between">
+                        <h2><span class="card-header-dot"></span> Match Win Probability & Momentum Tracker</h2>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="legend-color ind-color"></span> IND</span>
+                            <span class="legend-item"><span class="legend-color pak-color"></span> PAK</span>
+                            <span class="legend-item"><span class="legend-color momentum-color"></span> Momentum</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <!-- Canvas for drawing charts -->
+                        <canvas id="match-chart"></canvas>
+                        
+                        <!-- Hover detail box -->
+                        <div id="chart-tooltip" class="chart-tooltip hidden"></div>
+                    </div>
+                    
+                    <div class="chart-navigation flex-between">
+                        <span class="chart-info-text">Hover/Touch points to inspect specific deliveries and matching win probabilities.</span>
+                        <div class="chart-controls-btn">
+                            <button id="zoom-18-20" class="mini-btn">Zoom Death Overs (18-20)</button>
+                            <button id="reset-zoom" class="mini-btn active">Full Match View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics Grid (Match Stats, Matchups, Phase Breakdown) -->
+                <div class="metrics-subgrid">
+                    
+                    <!-- Phase Breakdown Card -->
+                    <div class="card glass-card metrics-card">
+                        <div class="card-header">
+                            <h3>Innings Phase Breakdown</h3>
+                        </div>
+                        <div class="phase-bars" id="phase-bars-container">
+                            <!-- Populated dynamically via JS -->
+                            <div class="loading-placeholder">Select a match to load phase-wise runs and wickets.</div>
+                        </div>
+                    </div>
+
+                    <!-- Batter vs Bowler Matchup Matrix -->
+                    <div class="card glass-card metrics-card">
+                        <div class="card-header">
+                            <h3>Decisive Bowler-Batter Matchups</h3>
+                        </div>
+                        <div class="matchup-matrix-wrapper">
+                            <table class="matchup-table" id="matchup-table">
+                                <thead>
+                                    <tr>
+                                        <th>Batter</th>
+                                        <th>Bowler</th>
+                                        <th>Runs (Balls)</th>
+                                        <th>Outs</th>
+                                        <th>SR</th>
+                                        <th>Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="matchup-table-body">
+                                    <!-- Dynamic rows -->
+                                    <tr>
+                                        <td colspan="6" class="text-center">Select match data to view bowler matchups.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Performance Panel -->
+                <div class="card glass-card player-perf-card">
+                    <div class="card-header flex-between">
+                        <h2><span class="card-header-dot blue"></span> Live Player Analytics Centre</h2>
+                        <div class="player-chips" id="player-chips">
+                            <!-- Dynamic player select chips -->
+                        </div>
+                    </div>
+                    
+                    <div class="player-analytics-content" id="player-analytics-content">
+                        <!-- Dynamically filled with selected player's details -->
+                        <div class="empty-state">Select a player to view career averages, match outcomes, and venue analytics.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- App Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 CricketIQ AI. Powered by Gemma 4 E4B. Running in browser-sandbox environments.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="matchData.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
